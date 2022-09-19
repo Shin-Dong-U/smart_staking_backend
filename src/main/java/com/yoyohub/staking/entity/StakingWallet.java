@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Entity
-public class stakingWallet {
+public class StakingWallet {
 
     @Id
     @Column(name = "staking_wallet_id")
@@ -22,7 +22,7 @@ public class stakingWallet {
     private BigDecimal totalYcoin;
 
     @Builder
-    public stakingWallet(String userId, BigDecimal totalYcoin) {
+    public StakingWallet(String userId, BigDecimal totalYcoin) {
         this.userId = userId;
         this.totalYcoin = totalYcoin;
     }

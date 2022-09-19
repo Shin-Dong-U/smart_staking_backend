@@ -23,8 +23,6 @@ public class Withdraw {
 
     private int amount;
 
-    private int type;
-
     private int status;
 
     private LocalDateTime processedDate;
@@ -34,11 +32,10 @@ public class Withdraw {
     private LocalDateTime registeredDate;
 
     @Builder
-    public Withdraw(String userId, int goldWalletDetailId, int amount, int type, int status, LocalDateTime processedDate, LocalDateTime modifiedDate, LocalDateTime registeredDate) {
+    public Withdraw(String userId, int goldWalletDetailId, int amount, int status, LocalDateTime processedDate, LocalDateTime modifiedDate, LocalDateTime registeredDate) {
         this.userId = userId;
         this.goldWalletDetailId = goldWalletDetailId;
         this.amount = amount;
-        this.type = type;
         this.status = status;
         this.processedDate = processedDate;
         this.modifiedDate = modifiedDate;
