@@ -17,7 +17,7 @@ public enum GoldWalletWithdrawTypeCode implements EnumMapperType {
     WITHDRAW_REJECT(4, "출금요청반려"),
     RE_STAKING_REQUEST(5, "리스테이킹요청"),
     RE_STAKING_CANCEL(6, "리스테이킹취소"),
-    RE_STAKING_COMPLETE(6, "리스테이킹완료");
+    RE_STAKING_COMPLETE(7, "리스테이킹완료");
 
     @Getter private int code;
     @Getter private String desc;

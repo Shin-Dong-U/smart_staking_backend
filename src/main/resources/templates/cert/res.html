@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>*** NHN KCP Online Payment System ***</title>
+    <script>
+        window.onload=function()
+        {
+            // 개발자 모드 열기 비활성화
+            document.onkeydown = function(e) {
+                console.log(e.keyCode)
+                if (e.keyCode == 123 || e.keyCode == 17 || e.keyCode == 16 || e.keyCode == 73) {
+                    e.keyCode = 1;
+                    return false;
+                }
+            }
+            alert('완료 되었습니다.');
+            window.close();
+        }
+    </script>
 </head>
-<body>
-hello cert res
-</body>
+<body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;" />
+
 </html>
