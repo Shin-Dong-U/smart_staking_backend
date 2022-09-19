@@ -1,6 +1,6 @@
 package com.yoyohub.staking.common;
 
-import com.yoyohub.staking.common.code.UserGrade;
+import com.yoyohub.staking.common.code.enums.UserGrade;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

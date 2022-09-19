@@ -1,4 +1,7 @@
-package com.yoyohub.staking.common.code;
+package com.yoyohub.staking.common.code.enums;
+
+import com.yoyohub.staking.common.code.EnumMapperType;
+import lombok.Getter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -11,22 +14,12 @@ public enum SexCode implements EnumMapperType {
     MALE(1, "남자"),
     FEMALE(2, "여자");
 
-    private int code;
-    private String desc;
+    @Getter private int code;
+    @Getter private String desc;
 
     SexCode(int code, String desc) {
         this.code = code;
         this.desc = desc;
-    }
-
-    @Override
-    public int getCode() {
-        return this.code;
-    }
-
-    @Override
-    public String getDesc() {
-        return this.desc;
     }
 
     private static final Map<Integer, SexCode> COMMON_CODE_ENUMS =

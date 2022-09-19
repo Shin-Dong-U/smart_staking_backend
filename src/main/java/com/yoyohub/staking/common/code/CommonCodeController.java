@@ -1,4 +1,4 @@
-package com.yoyohub.staking.common;
+package com.yoyohub.staking.common.code;
 
 import com.yoyohub.staking.common.code.EnumMapper;
 import com.yoyohub.staking.common.code.EnumMapperValue;

@@ -1,5 +1,6 @@
-package com.yoyohub.staking.common.code;
+package com.yoyohub.staking.common.code.enums;
 
+import com.yoyohub.staking.common.code.EnumMapperType;
 import lombok.Getter;
 
 import java.util.Map;
