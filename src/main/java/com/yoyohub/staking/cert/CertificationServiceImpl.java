@@ -5,12 +5,14 @@ import com.yoyohub.staking.config.CertificationConfiguration;
 import com.yoyohub.staking.entity.TempPerson;
 import com.yoyohub.staking.repository.TempPersonRepository;
 import kr.co.kcp.CT_CLI;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class CertificationServiceImpl implements CertificationService {
 
@@ -46,14 +48,20 @@ public class CertificationServiceImpl implements CertificationService {
         // 4. 데이터 복호화
         Person person = decode(cc, certConf, ordrIdxx, certNo, encodeCertData);
 
-        // 5. 임시 테이블 데이터 저장
-        TempPerson tempPerson = convert(person);
-        personRepo.save(tempPerson);
-
-        // 6. 객체 반환
+        // 5. 객체 반환
         cc = null;
 
         return new CertificationResult(person, true, "");
+    }
+
+    public void saveTempPerson(CertificationResult result) {
+        if(result.isSuccess()) {
+            TempPerson tempPerson = convert(result.getPerson());
+            personRepo.save(tempPerson);
+            log.info("[본인인증성공] " + result.getPerson().getOrdrIdxx());
+        }else {
+            log.info("[본인인증실패]" + result.getMessage());
+        }
     }
 
     private boolean isSuccess(String code) {

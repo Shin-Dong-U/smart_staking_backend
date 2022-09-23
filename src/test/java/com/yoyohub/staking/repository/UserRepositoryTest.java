@@ -31,8 +31,8 @@ public class UserRepositoryTest {
                 .name("홍길동")
                 .phone("1234")
                 .email("kkk@kjlkj")
-                .ciCode("ci")
-                .diCode("di")
+                .ci("ci")
+                .di("di")
                 .registeredDate(LocalDateTime.now())
                 .build();
     }

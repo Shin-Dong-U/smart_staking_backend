@@ -49,14 +49,15 @@ public class CertificationController {
 
     /**
      * 본인인증 결과 수신
+     * NHN KCP에서 결과를 수신하면, 해당 결과를 복호화하여 리턴
      * @param request
      * @return
      */
+    @CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "false")
     @PostMapping
     public String certificationResultCallback(HttpServletRequest request) {
         CertificationResult result = certService.decodeResult(request);
-        boolean isSuccess = result.isSuccess();
-        System.out.println(result);
+        certService.saveTempPerson(result);
 
         return "cert/res";
     }
