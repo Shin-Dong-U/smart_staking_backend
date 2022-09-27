@@ -1,5 +1,7 @@
 package com.yoyohub.staking.user;
 
+import static com.yoyohub.staking.common.CommonUtil.*;
+
 import com.yoyohub.staking.entity.User;
 import com.yoyohub.staking.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +36,13 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
 
-        // 3. 회원가입
+        // 3. 비밀번호 암호화
+        String password = encrypt(user.getPassword(), getSalt());
+        String password2 = encrypt(user.getPassword2(), getSalt());
+        user.setPassword(password);
+        user.setPassword2(password2);
+
+        // 4. 회원가입
         user.setRegisteredDate(LocalDateTime.now());
         userRepo.save(user);
 
@@ -42,7 +50,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String username, String password) {
-        return null;
+    public User login(User loginInfo) {
+        if(!validLoginInfo(loginInfo)) { return null; }
+
+        // 1. ID로 DB 조회
+        User dbuser = userRepo.findById(loginInfo.getId()).orElse(null);
+
+        // 2. 유저가 없다면 null 반환
+        if(!validLoginInfo(dbuser)) { return null; }
+
+        // 3. 비밀번호 확인
+        String dbPwd = dbuser.getPassword();
+        String loginPwd = encrypt(loginInfo.getPassword(), getSalt());
+        boolean isMatch = dbPwd.equals(loginPwd);
+
+        // 4. 비밀번호가 일치하지 않는다면 null 반환
+        if(!isMatch) { return null; }
+
+        return dbuser;
     }
+
+    private boolean validLoginInfo(User loginInfo) {
+        if(isNullOrEmpty(loginInfo, loginInfo.getId(), loginInfo.getPassword())){
+            return false;
+        }
+
+        return true;
+    }
+
 }
