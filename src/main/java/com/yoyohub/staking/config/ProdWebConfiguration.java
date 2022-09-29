@@ -8,9 +8,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Profile("dev")
+@Profile("prod")
 @Configuration
-public class WebConfiguration implements WebMvcConfigurer {
+public class ProdWebConfiguration implements WebMvcConfigurer {
 
     @Autowired private JwtTokenInterceptor jwtTokenInterceptor;
 
@@ -23,7 +23,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("http://yosmart")
                 .allowCredentials(true);
     }
 }
