@@ -3,8 +3,10 @@ package com.yoyohub.staking.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -19,10 +21,10 @@ public class RewardClickHistory {
 
     private String userId;
 
-    private LocalDateTime registeredDate;
+    private Date registeredDate;
 
     @Builder
-    public RewardClickHistory(String userId, LocalDateTime registeredDate) {
+    public RewardClickHistory(String userId, Date registeredDate) {
         this.userId = userId;
         this.registeredDate = registeredDate;
     }

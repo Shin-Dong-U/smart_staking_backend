@@ -44,6 +44,7 @@ public class UserController {
     }
 
     @ResponseBody
+
     @GetMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletResponse response) {
         jwtManager.removeAllTokenCookies(response);

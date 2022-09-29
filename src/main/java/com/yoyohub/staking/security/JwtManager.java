@@ -14,6 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
@@ -141,6 +142,13 @@ public class JwtManager {
      */
     public String getId(String token, TokenType type) {
         return getClaims(token, type).getOrDefault("id", "").toString();
+    }
+
+    public String getId(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String[] tokens = getTokensFromCookies(cookies);
+
+        return getId(tokens[0], TokenType.ACCESS_TOKEN);
     }
 
     /**
