@@ -50,11 +50,12 @@ public class CommonUtil {
     }
 
     public static String encrypt(String pwd, String salt) {
-        byte[] saltBytes = salt.getBytes();
+        if(isNullOrEmpty(pwd, salt)) { throw new IllegalArgumentException(); }
+        String pwdAndSalt = pwd + salt;
+
         String result = "";
 
-        byte[] temp = pwd.getBytes();
-        byte[] bytes = new byte[temp.length + saltBytes.length];
+        byte[] bytes = pwdAndSalt.getBytes();
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -102,6 +103,12 @@ public class CommonUtil {
         }
 
         return false;
+    }
+
+    public static void printEncrypt(String pwd, String salt) {
+        System.out.println("pwd: " + pwd);
+        System.out.println("salt: " + salt);
+        System.out.println("encrypt: " + encrypt(pwd, salt));
     }
 
 }

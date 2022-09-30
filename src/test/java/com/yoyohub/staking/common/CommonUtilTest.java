@@ -69,16 +69,43 @@ class CommonUtilTest {
 
     @Test
     void encrypt() {
-        String pwd = "123456";
-        String toBe = CommonUtil.encrypt(pwd, CommonUtil.getSalt());
-        assertEquals(toBe, CommonUtil.encrypt(pwd, CommonUtil.getSalt()));
+        String salt = "97448316";
 
+        // case1. 같은 비밀번호, salt 테스트
+        String pwd = "1234";
+        String enc = CommonUtil.encrypt(pwd, salt);
+        String eqTest = CommonUtil.encrypt(pwd, salt);
+        assertEquals(enc, eqTest);
+
+        // case2. 같은 비밀번호, salt 테스트 (특문포함)
         String pwd2 = "asdf1234@!";
-        String toBe2 = CommonUtil.encrypt(pwd2, CommonUtil.getSalt());
-        assertEquals(toBe2, CommonUtil.encrypt(pwd2, CommonUtil.getSalt()));
+        String enc2 = CommonUtil.encrypt(pwd2, salt);
+        String symbolEqTest = CommonUtil.encrypt(pwd2, salt);
+        assertEquals(enc2, symbolEqTest);
 
-        String pwd3 = null;
-        assertThrows(NullPointerException.class, () -> CommonUtil.encrypt(pwd3, CommonUtil.getSalt()));
+        // case3. 다른 비밀번호 테스트 (문자열 길이 동일)
+        String pwd3 = "1234";
+        String enc3 = CommonUtil.encrypt(pwd3, salt);
+        String neTest = CommonUtil.encrypt("4321", salt);
+        assertNotEquals(enc3, neTest);
+
+        // case4. 다른 비밀번호 테스트 (문자열 길이 다름)
+        String pwd4 = "1234";
+        String enc4 = CommonUtil.encrypt(pwd4, salt);
+        String neTest2 = CommonUtil.encrypt("123", salt);
+        assertNotEquals(enc4, neTest2);
+
+        // case5. 다른 salt 테스트
+        String pwd5 = "1234";
+        String enc5 = CommonUtil.encrypt(pwd5, salt);
+        String neTest3 = CommonUtil.encrypt("123", salt);
+        assertNotEquals(enc5, neTest3);
+
+        // 파라미터 테스트
+        assertThrows(IllegalArgumentException.class, () -> CommonUtil.encrypt(null, CommonUtil.getSalt()));
+        assertThrows(IllegalArgumentException.class, () -> CommonUtil.encrypt("", CommonUtil.getSalt()));
+        assertThrows(IllegalArgumentException.class, () -> CommonUtil.encrypt("1234", null));
+        assertThrows(IllegalArgumentException.class, () -> CommonUtil.encrypt("1234", ""));
     }
 
     @Test

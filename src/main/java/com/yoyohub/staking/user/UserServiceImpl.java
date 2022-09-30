@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
         }
 
         // 3. 비밀번호 암호화
-        String password = encrypt(user.getPassword(), getSalt());
-        String password2 = encrypt(user.getPassword2(), getSalt());
+        String password = encrypt(user.getPassword(), user.getDi());
+        String password2 = encrypt(user.getPassword2(), user.getDi());
         user.setPassword(password);
         user.setPassword2(password2);
 
@@ -53,16 +53,21 @@ public class UserServiceImpl implements UserService {
     public User login(User loginInfo) {
         if(!validLoginInfo(loginInfo)) { return null; }
 
+        String loginId = loginInfo.getId();
+        String loginPwd = loginInfo.getPassword();
+
         // 1. ID로 DB 조회
-        User dbuser = userRepo.findById(loginInfo.getId()).orElse(null);
+        User dbuser = userRepo.findById(loginId).orElse(null);
 
         // 2. 유저가 없다면 null 반환
         if(!validLoginInfo(dbuser)) { return null; }
 
+        String dbPwdEnc = dbuser.getPassword();
+        String salt = dbuser.getDi();
+
         // 3. 비밀번호 확인
-        String dbPwd = dbuser.getPassword();
-        String loginPwd = encrypt(loginInfo.getPassword(), getSalt());
-        boolean isMatch = dbPwd.equals(loginPwd);
+        String loginPwdEnc = encrypt(loginPwd, salt);
+        boolean isMatch = dbPwdEnc.equals(loginPwdEnc);
 
         // 4. 비밀번호가 일치하지 않는다면 null 반환
         if(!isMatch) { return null; }
