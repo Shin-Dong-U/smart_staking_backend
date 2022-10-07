@@ -31,7 +31,7 @@ public class CertificationController {
      * @return
      */
     @GetMapping("/{orderId}")
-    public String certificationApiCall(@PathVariable String orderId, Model model) {
+    public String certificationApiCall(@PathVariable String orderId, Model model, HttpServletRequest request) {
         log.info("[인증요청] " + orderId);
 
         CT_CLI cc = new CT_CLI();
