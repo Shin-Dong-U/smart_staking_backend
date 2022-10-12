@@ -15,10 +15,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.antMatcher("/**")
                 .authorizeRequests()
-                .mvcMatchers("/certification/**").permitAll()
-                .mvcMatchers("/user/register").permitAll()
-                .mvcMatchers("/user/login").permitAll()
-                .mvcMatchers("/user/logout").permitAll()
+                .mvcMatchers("/certification*", "/certification/**").permitAll()
+                .mvcMatchers("/user/register", "/user/login", "/user/logout").permitAll()
                 .mvcMatchers("/user/admin").hasRole(Role.ADMIN.getDesc())
                 .mvcMatchers("/auth/daily-reward").permitAll()
                 .anyRequest().authenticated()
