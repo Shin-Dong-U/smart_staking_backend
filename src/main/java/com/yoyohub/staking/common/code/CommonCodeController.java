@@ -1,7 +1,5 @@
 package com.yoyohub.staking.common.code;
 
-import com.yoyohub.staking.common.code.EnumMapper;
-import com.yoyohub.staking.common.code.EnumMapperValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +12,10 @@ import java.util.Map;
 @RestController
 public class CommonCodeController {
 
-    @Autowired private EnumMapper enumMapper;
+    @Autowired private CommonCode commonCode;
 
     @GetMapping("/common/code")
     public ResponseEntity<Map<String, List<EnumMapperValue>>> getEnumMapper() {
-        return new ResponseEntity<>(enumMapper.getCodes(), HttpStatus.OK);
+        return new ResponseEntity<>(commonCode.enumMapper().getCodes(), HttpStatus.OK);
     }
 }

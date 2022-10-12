@@ -1,6 +1,6 @@
-package com.yoyohub.staking.common.code.enums;
+package com.yoyohub.staking.common.code;
 
-import com.yoyohub.staking.common.code.*;
+import com.yoyohub.staking.common.code.enums.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 

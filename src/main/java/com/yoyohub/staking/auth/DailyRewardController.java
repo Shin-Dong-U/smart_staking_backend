@@ -1,8 +1,5 @@
 package com.yoyohub.staking.auth;
 
-import com.yoyohub.staking.entity.RewardClickHistory;
-import com.yoyohub.staking.repository.RewardClickHistoryRepository;
-import com.yoyohub.staking.security.JwtManager;
 import com.yoyohub.staking.user.RewardClickService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

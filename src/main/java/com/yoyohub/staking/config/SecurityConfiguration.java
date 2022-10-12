@@ -18,7 +18,7 @@ public class SecurityConfiguration {
                 .mvcMatchers("/certification*", "/certification/**").permitAll()
                 .mvcMatchers("/user/register", "/user/login", "/user/logout").permitAll()
                 .mvcMatchers("/user/admin").hasRole(Role.ADMIN.getDesc())
-                .mvcMatchers("/auth/daily-reward").permitAll()
+                .mvcMatchers("/auth/daily-reward", "/common/code").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
