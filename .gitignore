@@ -36,3 +36,5 @@ src/main/resources/dev/*.properties
 src/main/resources/prod/*.properties
 
 SimpleTest.java
+
+nohup.out

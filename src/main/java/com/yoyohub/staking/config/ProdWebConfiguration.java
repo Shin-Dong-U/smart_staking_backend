@@ -23,9 +23,7 @@ public class ProdWebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost", "https://localhost")
-                .allowedOrigins("http://yosmart.kr", "https://yosmart.kr")
-                .allowedOrigins("http://test.yosmart.kr", "https://test.yosmart.kr")
+                .allowedOrigins("http://yosmart.kr", "https://yosmart.kr", "http://test.yosmart.kr", "https://test.yosmart.kr")
                 .allowCredentials(true);
     }
 }
