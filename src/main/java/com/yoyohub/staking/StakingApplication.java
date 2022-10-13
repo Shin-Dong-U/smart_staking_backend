@@ -1,5 +1,6 @@
 package com.yoyohub.staking;
 
+import com.yoyohub.staking.etc.Prayer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -13,6 +14,8 @@ public class StakingApplication {
 
         if(profile == null)
             System.setProperty("spring.profiles.active", "dev");
+
+        Prayer.print();
 
         SpringApplication.run(StakingApplication.class, args);
     }
